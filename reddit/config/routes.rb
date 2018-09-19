@@ -1,13 +1,13 @@
-# Prefix Verb   URI Pattern                                                                              Controller#Action
-#                     users POST   /users(.:format)                                                                         users#create
-#                  new_user GET    /users/new(.:format)                                                                     users#new
-#               new_session GET    /session/new(.:format)                                                                   sessions#new
-#                   session DELETE /session(.:format)                                                                       sessions#destroy
-#                           POST   /session(.:format)                                                                       sessions#create
 
 Rails.application.routes.draw do
-  resources :subs, except: :destroy
+  resources :comments, only: [:create, :show]
+  resources :subs, except: :destroy do
+    resources :posts, only: :show
+  end
   resources :users, only: [:new, :create]
   resource :session, only: [:new, :create, :destroy]
+  resources :posts, only: [:destroy, :new, :create, :edit, :update, :show] do
+    resources :comments, only: :new
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

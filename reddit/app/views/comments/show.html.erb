@@ -1,0 +1,14 @@
+<h4>Reply to this comment:</h4>
+<form class="" action="/comments" method="post">
+  <%= auth_token %>
+<label>Body
+  <textarea name="comment[content]"></textarea>
+</label>
+<input type="hidden" name="comment[post_id]" value="<%= @comment.post_id %>">
+<% if @comment.parent_comment_id == nil %>
+<input type="hidden" name="comment[parent_comment_id]" value="<%= @comment.id %>">
+<% else %>
+<input type="hidden" name="comment[parent_comment_id]" value="<%= @comment.parent_comment_id %>">
+<% end %>
+<input type="submit" name="" value="Submit">
+</form>

@@ -1,2 +1,15 @@
-<h1>Subs#edit</h1>
-<p>Find me in app/views/subs/edit.html.erb</p>
+<h1>Edit your Sub</h1>
+
+<form class="" action="<%=sub_url(@sub)%>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="patch">
+  <label>Name
+    <input type="text" name="sub[title]" value="<%=@sub.title%>">
+  </label>
+  <label>Description
+    <textarea name="sub[description]"><%=@sub.description%></textarea>
+  </label>
+  
+  <input type="submit" name="" value="Submit!">
+  
+</form>

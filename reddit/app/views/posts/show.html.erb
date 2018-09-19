@@ -1,0 +1,19 @@
+<h1><%= @post.title %> by <%= @post.user.username %></h1>
+<h4>Content:</h4>
+<h4><%= @post.content %></h4>
+
+<h4>Sub: <a href="<%= sub_url(@post.sub) %>"><%= @post.sub.title %></a></h4> 
+<a href="<%= new_post_comment_url(@post) %>">Comment on this post!</a>
+<br>
+<ul>
+<% @comments.each do |comment| %>
+  <% whitespace = "     ...       " %>
+  <li><%= comment.user.username %>: <a href="<%= comment_url(comment) %>"><%= comment.content %></a></li>
+  <% if comment.child_comments %>
+  <% comment.child_comments.each do |child_comment| %>
+  <li> <%= whitespace %><%= child_comment.user.username %>: <a href="<%= comment_url(child_comment) %>"><%= child_comment.content %></li>
+    <% whitespace += "     ...       " %>
+    <% end %>
+  <% end %>
+<% end %>
+</ul>
